@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: wodediannao
+    url: jdbc:mysql://localhost:3306/movies
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+teamProject:
+    basePath: ${user.dir}/img/poster/
