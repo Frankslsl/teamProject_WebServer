@@ -17,12 +17,11 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(Exception.class)
     public Result<String> exceptionHandler(Exception e) {
         log.error("cause is by : " + e.getCause());
         log.error("message : " + e.getLocalizedMessage());
-        if (e.getMessage().contains("Duplicate entry")) {
+        if (e.getCause().toString().contains("Duplicate entry")) {
             String s = e.getMessage().split(";")[1];
             String detail = s.split(" ")[3];
             System.out.println("detail = " + detail);

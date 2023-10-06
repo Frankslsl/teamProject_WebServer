@@ -75,6 +75,7 @@ public class MovieController {
         String substring = l.toString().substring(0, 8);
         Long id = Long.parseLong(substring);
         movie.setId(id);
+        log.info("The movie will be added is {}", movie.toString());
         return movieService.insertMovie(movie);
     }
 
@@ -116,6 +117,7 @@ public class MovieController {
             }
             movie.setImgurl(fileName);
         }
+        log.info("the movie will be updated to {}", movie.toString());
         Result<String> stringResult = movieService.updateMovie(movie);
         return stringResult;
     }
