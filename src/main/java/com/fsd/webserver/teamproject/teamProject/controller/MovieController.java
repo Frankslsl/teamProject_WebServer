@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.fsd.webserver.teamproject.teamProject.common.Result;
 import com.fsd.webserver.teamproject.teamProject.domain.Movie;
 import com.fsd.webserver.teamproject.teamProject.service.MovieService;
+import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -93,7 +94,7 @@ public class MovieController {
 //    }
 
     @PutMapping
-    Result<String> updateMovie(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam Long id,@RequestParam String title, @RequestParam LocalDate releasedate, @RequestParam String genre, @RequestParam String director, @RequestParam BigDecimal rating) {
+    public Result<String> updateMovie(@RequestParam(value = "file", required = false) MultipartFile file, @RequestParam Long id,@RequestParam String title, @RequestParam LocalDate releasedate, @RequestParam String genre, @RequestParam String director, @RequestParam BigDecimal rating) {
         Movie movie = new Movie();
         movie.setId(id);
         movie.setGenre(genre);
@@ -120,5 +121,12 @@ public class MovieController {
         log.info("the movie will be updated to {}", movie.toString());
         Result<String> stringResult = movieService.updateMovie(movie);
         return stringResult;
+    }
+
+    @GetMapping("/search/")
+    public Result<List<Movie>> getMoviesByLikeTitle(@RequestParam("keyWord") String keyWord){
+        log.info("======================>"+keyWord);
+        Result<List<Movie>> listResult = movieService.selectByLikeTitle(keyWord);
+        return listResult;
     }
 }

@@ -18,4 +18,6 @@ public interface MovieService  {
 
     Result<Movie> selectById(Long id);
 
+    Result<List<Movie>> selectByLikeTitle(String keyWord);
+
 }

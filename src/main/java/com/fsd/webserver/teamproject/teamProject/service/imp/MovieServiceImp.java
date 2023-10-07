@@ -60,4 +60,15 @@ public class MovieServiceImp implements MovieService {
         return Result.success(movie,HttpStatus.ACCEPTED);
     }
 
+    @Override
+    public Result<List<Movie>> selectByLikeTitle(String keyWord) {
+        MovieExample example = new MovieExample();
+        example.createCriteria().andTitleLike("%"+keyWord+"%");
+        List<Movie> movies = movieMapper.selectByExample(example);
+        if (!movies.isEmpty()) {
+            return Result.success(movies, HttpStatus.ACCEPTED);
+        }
+        return Result.error("There is no movie stored in database", HttpStatus.NO_CONTENT);
+    }
+
 }
