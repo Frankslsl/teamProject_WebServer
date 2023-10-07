@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 /**
- *
+ * exception handler
  */
 @RestControllerAdvice
 @ResponseBody
@@ -19,6 +19,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result<String> exceptionHandler(Exception e) {
+        // Because the title property has been set unique in Mysql database, so this will handle the exception if a movie has a existing title
         log.error("cause is by : " + e.getCause());
         log.error("message : " + e.getLocalizedMessage());
         if (e.getCause().toString().contains("Duplicate entry")) {

@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import java.util.List;
 
 /**
- *
+ * re-allocation the url
  */
 @Slf4j
 @Configuration
@@ -23,7 +23,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/build/**").addResourceLocations("classpath:/static/build/");
         registry.addResourceHandler("/poster/**").addResourceLocations("file:./img/poster/");
     }
-
+    //active the strategy for serialization and deserialization
     @Override
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
